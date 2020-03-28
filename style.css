@@ -1,0 +1,90 @@
+body {
+    background-color: lightblue;
+}
+
+h1 {
+    color: orangered;
+    font-family: Tahoma;
+    text-align: center;
+}
+
+#container {
+    height: 60vh;
+    overflow-y: auto;
+    border: 1px dotted #ddd;
+    border-radius: 10px;
+    background-color: black;
+    color: azure;
+}
+
+#images {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+figure {
+    width: 200px;
+    height: 200px;
+    padding-left: 45px;
+    margin-bottom: 50px;
+}
+
+figcaption {
+    display: flex;
+    flex-direction: column
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
+
+#pagehub {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column
+}
+#pagehub1 {
+    display: flex;
+    justify-content: center;
+}
+
+.pages {
+    margin-right: 20px;
+}
+.pages a {
+    padding: 6px 12px;
+    color: orangered;
+}
+.pages a.one {
+    background-color: orangered;
+    color: beige;
+}
+.pages a:hover:not(.one) {
+    background-color: beige;
+
+}
+
+.search {
+    padding: 8px;
+    border: solid 1px orangered;
+    outline: 0;
+
+}
+
+
+
+#pagehub2 {
+    margin: 10px
+}
+
+.contents {
+    font-size: 0.9rem;
+}
+
+
+
+
