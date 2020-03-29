@@ -79,6 +79,16 @@ function pageButtons(pages) {
     })
 }
 
+const getData =()=>{
+    let endpoint = `https://jsonplaceholder.typicode.com/photos`;
+			fetch(endpoint)
+			.then(res => res.json())
+			.then(data => {
+				count = data.length;
+				buildImages(querySet, page, gap);
+			})
+}
+
 function buildImages() {
 totalPage = document.getElementById('images');
 
