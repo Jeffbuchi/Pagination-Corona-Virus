@@ -1,40 +1,91 @@
-let prior = 0;
-let end = 10;
-let count;
-let page = 1;
-let pageLimit = 5;
+let imgData = [{
+    'img1' : "https://web.aflia.net/wp-content/uploads/2020/02/corona-12-1200x480.jpg",
+    'desc' : "Be Prayerful",
+},
+{
+    'img2' : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTuPZfL9_eGMfOLe56Sbvl5apAi9y_zhmVXxPy-fPAhe5h53HXZ",
+    'desc' : "Do not touch your face",
+},
+{
+    'img2' : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRvMneBc-nh8tiesUbQwhy9W3jNzJoZvN1iDVWMHTbtFmM-3h8J",
+    'desc' : "Use Hand Sanitizer",
+},
+{
+    'img2' : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTuPZfL9_eGMfOLe56Sbvl5apAi9y_zhmVXxPy-fPAhe5h53HXZ",
+    'desc' : "Do not touch your face",
+},
+{
+    'img2' : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTuPZfL9_eGMfOLe56Sbvl5apAi9y_zhmVXxPy-fPAhe5h53HXZ",
+    'desc' : "Do not touch your face",
+},
+{
+    'img2' : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTuPZfL9_eGMfOLe56Sbvl5apAi9y_zhmVXxPy-fPAhe5h53HXZ",
+    'desc' : "Do not touch your face",
+},
+{
+    'img2' : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTuPZfL9_eGMfOLe56Sbvl5apAi9y_zhmVXxPy-fPAhe5h53HXZ",
+    'desc' : "Do not touch your face",
+},
+{
+    'img2' : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTuPZfL9_eGMfOLe56Sbvl5apAi9y_zhmVXxPy-fPAhe5h53HXZ",
+    'desc' : "Do not touch your face",
+},
+{
+    'img2' : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTuPZfL9_eGMfOLe56Sbvl5apAi9y_zhmVXxPy-fPAhe5h53HXZ",
+    'desc' : "Do not touch your face",
+},
+{
+    'img2' : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTuPZfL9_eGMfOLe56Sbvl5apAi9y_zhmVXxPy-fPAhe5h53HXZ",
+    'desc' : "Do not touch your face",
+}
 
-const begin = document.getElementById('prev');
-const next = document.getElementById('next');
-const pages= document.querySelector('.pages');
-const pageGlance = document.querySelectorAll('.pages a');
-const search = document.querySelector('.search');
+];
 
+let state = {
+    'querySet' : imgData,
+    'page' : 1,
+    'gap'   : 5
+}
 
-const getImages = (prior, end) => {
-    let fetchApi = `https://jsonplaceholder.typicode.com/photos?_prior=${prior}&_end=${end}`;
-    fetch(fetchApi)
-    .then(res => res.json())
-    .then(image => {
-        let document = "";
-        let scroll = Math.ceil(count/end);
-        let max = page + Math.floor(pageLimit/2);
-        let min = page - Math.floor(pageLimit/2);
+buildImages();
 
-        pages.innerHTML += `<a id = "prev" href = "#">????;</a>`
+function pagination(querySet, page, gap){
+    let trimStart = (page - 1) * gap;
+    let trimEnd = trimStart + gap;
 
-        if (min <= 0) {
-            min = 1;
-            max = pageLimit
-        }
-        if (max > scroll) {
-            max = scroll;
-            min = scroll - (pageLimit - 1);
-        }
+    let trimmedData = querySet.slice(trimStart, trimEnd);
 
-        for (i = min; i <= max; i++){
-            pages.innerHTML += i === page ? `<a class="one" href = "#">${i}</a>` : `<a href = "#">${i}</a>`
-        }
-        pages.innerHTML += `<a id = "next" href = "#">.....;</a>`
+    let pages = Math.ceil(querySet.length/gap);
+
+    return {
+'querySet' : trimmedData,
+'pages' : pages
+    }
+}
+
+function pageButtons(pages) {
+    let hub = document.getElementById('pagehub1');
+    hub.innerHTML = '';
+
+    for (let page = 1; page <= pages; page++) {
+        hub.innerHTML += `<button value =${page} class="pagehub btn btn-sm btn-info">${page}</button>`
+    }
+
+    $('.page').on('click', function(){
+        $('.images').empty()
+
+        state.page = $('.this').val()
+        buildImages()
     })
 }
+
+function buildImages() {
+totalPage = document.getElementById('images');
+
+let pageData = pagination(state.querySet, state.page, state.gap);
+console.log('PageData :', pageData);
+
+
+}
+
+pageButtons(pageData.pages);
